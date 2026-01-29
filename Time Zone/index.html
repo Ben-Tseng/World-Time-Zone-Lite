@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Time Buddy Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- App Title -->
+        <div class="app-header">
+            <h1>World Time Zone <span class="lite">Lite</span></h1>
+        </div>
+
+        <!-- Control Bar -->
+        <div class="control-bar">
+            <div class="search-container">
+                <span class="search-icon">+</span>
+                <input type="text" id="location-search" placeholder="Place or timezone" autocomplete="off">
+                <div id="search-results" class="search-results"></div>
+            </div>
+
+            <div class="date-controls">
+                <label for="date-picker-input" class="calendar-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                    </svg>
+                </label>
+                <input type="date" id="date-picker-input" style="visibility: hidden; position: absolute; width: 0;">
+
+                <div class="date-strip-container" id="date-strip">
+                    <!-- Date items injected here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-container" id="timeline-container">
+            <!-- Time rows will be injected here via JS -->
+        </div>
+
+        <div class="selection-overlay" id="selection-overlay">
+            <!-- The vertical highlighter column -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
