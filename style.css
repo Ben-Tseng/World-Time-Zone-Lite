@@ -1,0 +1,367 @@
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #777777;
+    --row-hover: #f5f7f9;
+    --accent-color: #3b82f6;
+    --night-color: #334155;
+    --night-text: #94a3b8;
+    --day-color: #ffffff;
+    --day-text: #333333;
+    --weekend-color: #fee2e2;
+    /* Light red for weekend indication if we want */
+    --border-color: #e2e8f0;
+    --highlight-bg: rgba(59, 130, 246, 0.1);
+    --highlight-border: #3b82f6;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    background: #fff;
+    /* minimalist shadow */
+    /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+    border-radius: 8px;
+    padding: 20px 0;
+    position: relative;
+}
+
+/* App Header */
+.app-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+.app-header h1 {
+    font-size: 1.1rem;
+    /* Match time size */
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.app-header .lite {
+    font-weight: 300;
+    color: var(--text-secondary);
+}
+
+/* Control Bar */
+.control-bar {
+    background-color: #f1f5f9;
+    /* Light gray like reference */
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    /* Radius removed as it is below header */
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 4px 10px;
+    width: 300px;
+}
+
+.search-icon {
+    color: #9ca3af;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 8px;
+    cursor: default;
+}
+
+#location-search {
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    width: 100%;
+    color: var(--text-primary);
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 50;
+    display: none;
+}
+
+.search-result-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.search-result-item:hover {
+    background-color: var(--row-hover);
+}
+
+/* Date Controls */
+.date-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.calendar-btn:hover {
+    background-color: #e2e8f0;
+}
+
+.date-strip-container {
+    display: flex;
+    align-items: center;
+    background: #e2e8f0;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.date-item {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #64748b;
+    user-select: none;
+    min-width: 60px;
+    text-align: center;
+}
+
+.date-item.selected {
+    background-color: #fff;
+    color: var(--text-primary);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.date-item.weekend {
+    color: #ef4444;
+    /* Red for weekends */
+}
+
+.date-item:hover:not(.selected) {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Timeline Rows */
+.location-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    height: 80px;
+}
+
+.location-info {
+    width: 200px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 20px;
+    z-index: 10;
+    pointer-events: none;
+    position: relative;
+    /* For delete button positioning context if needed, or simply inside flex */
+}
+
+/* Delete Button */
+.delete-btn {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #cbd5e1;
+    font-size: 1.2rem;
+    padding: 2px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.2s;
+    pointer-events: auto;
+    /* Re-enable pointer events since parent has none */
+}
+
+.location-row:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    color: #ef4444;
+    background-color: #fee2e2;
+}
+
+.location-header-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.home-icon {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.offset-badge {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f59e0b;
+    /* Amber/Orange like WTB */
+}
+
+.location-detail {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.location-time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* Time Grid */
+.time-grid {
+    flex-grow: 1;
+    display: flex;
+    height: 40px;
+    /* The bars height */
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    cursor: crosshair;
+}
+
+.hour-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    /* 12px */
+    font-weight: 500;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    user-select: none;
+    transition: background-color 0.2s;
+    color: var(--text-secondary);
+}
+
+.hour-block:last-child {
+    border-right: none;
+}
+
+/* Day/Night Styling */
+.hour-block.day {
+    background-color: var(--day-color);
+    color: var(--day-text);
+}
+
+.hour-block.night {
+    background-color: var(--night-color);
+    color: var(--night-text);
+}
+
+.hour-block.weekend-day {
+    background-color: #fff7ed;
+    /* slight orange tint */
+}
+
+/* Home location styling differentiation (optional, making it look 'active') */
+.location-row.home-row .location-name {
+    color: #000;
+}
+
+/* Hover Highlight - The vertical bar */
+/* We will actually use a separate overlay or just utilize :hover on a shared parent via JS 
+   or simpler CSS trickery if possible, but for a true "column" highlight across rows, JS tracking is easiest 
+   or a massive grid. Let's try a simple approach first: 
+   Since interacting with one hour block should highlight that vertical slice.
+*/
+
+.hour-label {
+    margin-bottom: 2px;
+}
+
+.day-label {
+    font-size: 0.6rem;
+    opacity: 0.7;
+    font-weight: 300;
+}
+
+/* Selected Column Highlighter (Absolute overlay approach) */
+#selection-overlay {
+    position: absolute;
+    top: 76px;
+    /* Header height offset approx */
+    bottom: 0;
+    width: 0;
+    /* Dynamic */
+    background-color: rgba(255, 200, 0, 0.15);
+    border: 2px solid #fbbf24;
+    border-radius: 4px;
+    pointer-events: none;
+    display: none;
+    z-index: 5;
+}
+
+/* Current time marker */
+.current-time-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: red;
+    z-index: 20;
+    pointer-events: none;
+}
