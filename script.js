@@ -6,6 +6,7 @@ const locations = [
 ];
 
 // Expanded City Database for Search
+// Top 20+ Major Cities with Country Names for Search
 const cityDatabase = [
     { name: "New York", timezone: "America/New_York", label: "USA" },
     { name: "London", timezone: "Europe/London", label: "United Kingdom" },
@@ -15,14 +16,24 @@ const cityDatabase = [
     { name: "Dubai", timezone: "Asia/Dubai", label: "United Arab Emirates" },
     { name: "Sydney", timezone: "Australia/Sydney", label: "Australia" },
     { name: "Los Angeles", timezone: "America/Los_Angeles", label: "USA" },
+    { name: "Chicago", timezone: "America/Chicago", label: "USA" },
     { name: "Toronto", timezone: "America/Toronto", label: "Canada" },
     { name: "Singapore", timezone: "Asia/Singapore", label: "Singapore" },
     { name: "Seoul", timezone: "Asia/Seoul", label: "South Korea" },
+    { name: "Hong Kong", timezone: "Asia/Hong_Kong", label: "China" },
+    { name: "Shanghai", timezone: "Asia/Shanghai", label: "China" },
+    { name: "Beijing", timezone: "Asia/Shanghai", label: "China" },
+    { name: "Tokyo", timezone: "Asia/Tokyo", label: "Japan" },
+    { name: "Mumbai", timezone: "Asia/Kolkata", label: "India" },
+    { name: "Delhi", timezone: "Asia/Kolkata", label: "India" },
     { name: "San Francisco", timezone: "America/Los_Angeles", label: "USA" },
     { name: "Denver", timezone: "America/Denver", label: "USA" },
     { name: "Rio de Janeiro", timezone: "America/Sao_Paulo", label: "Brazil" },
+    { name: "Sao Paulo", timezone: "America/Sao_Paulo", label: "Brazil" },
     { name: "Cape Town", timezone: "Africa/Johannesburg", label: "South Africa" },
-    { name: "Shanghai", timezone: "Asia/Shanghai", label: "China" }
+    { name: "Cairo", timezone: "Africa/Cairo", label: "Egypt" },
+    { name: "Mexico City", timezone: "America/Mexico_City", label: "Mexico" },
+    { name: "Bangkok", timezone: "Asia/Bangkok", label: "Thailand" }
 ];
 
 const container = document.getElementById('timeline-container');
@@ -55,8 +66,9 @@ function setupSearch() {
             return;
         }
 
+        // Filter by City Name OR Country Label
         const matches = cityDatabase.filter(city =>
-            city.name.toLowerCase().includes(query) &&
+            (city.name.toLowerCase().includes(query) || city.label.toLowerCase().includes(query)) &&
             !locations.some(l => l.name === city.name && l.timezone === city.timezone)
         );
 
@@ -67,6 +79,10 @@ function setupSearch() {
     const searchIcon = document.querySelector('.search-icon');
     searchIcon.style.cursor = 'pointer';
     searchIcon.addEventListener('click', () => {
+        // Always open the list with full availability when clicking the plus icon
+        // Clear any existing search filter to avoid confusion
+        searchInput.value = '';
+
         if (searchResults.style.display === 'block') {
             searchResults.style.display = 'none';
         } else {
