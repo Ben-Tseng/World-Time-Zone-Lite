@@ -1,5 +1,5 @@
 const locations = [
-    { name: "Chicago", timezone: "America/Chicago", label: "USA" },
+    { name: "New York", timezone: "America/New_York", label: "USA" },
     { name: "Hong Kong", timezone: "Asia/Hong_Kong", label: "China" },
     { name: "Japan", timezone: "Asia/Tokyo", label: "Tokyo Time" },
     { name: "India", timezone: "Asia/Kolkata", label: "IST" }
