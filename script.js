@@ -18,7 +18,7 @@ const cityDatabase = [
     { name: "Los Angeles", timezone: "America/Los_Angeles", label: "USA" },
     { name: "Chicago", timezone: "America/Chicago", label: "USA" },
     { name: "Toronto", timezone: "America/Toronto", label: "Canada" },
-    { name: "Vancouver", timezone: "America/Toronto", label: "Canada" },
+    { name: "Vancouver", timezone: "America/Vancouver", label: "Canada" },
     { name: "Singapore", timezone: "Asia/Singapore", label: "Singapore" },
     { name: "Seoul", timezone: "Asia/Seoul", label: "South Korea" },
     { name: "Hong Kong", timezone: "Asia/Hong_Kong", label: "China" },
