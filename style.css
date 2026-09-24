@@ -1,367 +1,351 @@
 :root {
-    --bg-color: #ffffff;
-    --text-primary: #333333;
-    --text-secondary: #777777;
-    --row-hover: #f5f7f9;
-    --accent-color: #3b82f6;
-    --night-color: #334155;
-    --night-text: #94a3b8;
-    --day-color: #ffffff;
-    --day-text: #333333;
-    --weekend-color: #fee2e2;
-    /* Light red for weekend indication if we want */
-    --border-color: #e2e8f0;
-    --highlight-bg: rgba(59, 130, 246, 0.1);
-    --highlight-border: #3b82f6;
-    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --bg-color: #f8fafc;
+  --surface: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --accent-color: #2563eb;
+  --accent-soft: #eff6ff;
+  --night-color: #334155;
+  --night-text: #cbd5e1;
+  --day-color: #ffffff;
+  --weekend-color: #fff7ed;
+  --highlight-bg: rgba(245, 158, 11, 0.14);
+  --highlight-border: #f59e0b;
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background: var(--bg-color); }
 
 body {
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    -webkit-font-smoothing: antialiased;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  padding: 24px;
 }
+
+button, input { font: inherit; }
 
 .app-container {
-    width: 100%;
-    max-width: 1000px;
-    background: #fff;
-    /* minimalist shadow */
-    /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
-    border-radius: 8px;
-    padding: 20px 0;
-    position: relative;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: visible;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
 }
 
-/* App Header */
 .app-header {
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--border-color);
-    background-color: #fff;
-    border-radius: 8px 8px 0 0;
+  min-height: 76px;
+  padding: 17px 22px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
 }
 
-.app-header h1 {
-    font-size: 1.1rem;
-    /* Match time size */
-    font-weight: 700;
-    color: var(--text-primary);
-}
+.app-header h1 { font-size: 1.12rem; font-weight: 700; letter-spacing: -0.01em; }
+.app-header .lite { font-weight: 300; color: var(--text-secondary); }
+.app-subtitle { margin-top: 4px; font-size: 0.74rem; color: var(--muted); }
 
-.app-header .lite {
-    font-weight: 300;
-    color: var(--text-secondary);
-}
-
-/* Control Bar */
 .control-bar {
-    background-color: #f1f5f9;
-    /* Light gray like reference */
-    padding: 10px 15px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    /* Radius removed as it is below header */
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
 }
 
 .search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    padding: 4px 10px;
-    width: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  padding: 3px 8px;
+  width: min(340px, 48vw);
+}
+
+.search-container:focus-within {
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .search-icon {
-    color: #9ca3af;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-right: 8px;
-    cursor: default;
+  border: 0;
+  background: transparent;
+  color: var(--accent-color);
+  width: 26px;
+  height: 28px;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 #location-search {
-    border: none;
-    outline: none;
-    font-size: 0.95rem;
-    width: 100%;
-    color: var(--text-primary);
+  border: none;
+  outline: none;
+  font-size: 0.84rem;
+  width: 100%;
+  color: var(--text-primary);
+  background: transparent;
+  padding: 4px 4px;
 }
 
 .search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 1px solid var(--border-color);
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 50;
-    display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: -1px;
+  right: -1px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+  padding: 4px;
 }
 
 .search-result-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 0.9rem;
+  padding: 9px 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  border-radius: 6px;
 }
 
-.search-result-item:hover {
-    background-color: var(--row-hover);
-}
+.search-result-item:hover { background: #f1f5f9; }
+.search-result-name { font-weight: 600; }
+.search-result-meta { color: var(--text-secondary); font-size: 0.72rem; margin-top: 2px; }
 
-/* Date Controls */
-.date-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.date-controls { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.today-btn, .calendar-btn {
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-secondary);
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
 }
+.today-btn { padding: 0 10px; font-size: 0.76rem; }
+.today-btn:hover, .calendar-btn:hover { background: #f1f5f9; color: var(--text-primary); }
 
 .calendar-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: #64748b;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background 0.2s;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.calendar-btn:hover {
-    background-color: #e2e8f0;
+#date-picker-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .date-strip-container {
-    display: flex;
-    align-items: center;
-    background: #e2e8f0;
-    border-radius: 4px;
-    padding: 2px;
+  display: flex;
+  align-items: center;
+  background: #e2e8f0;
+  border-radius: 7px;
+  padding: 2px;
+  overflow: hidden;
 }
 
 .date-item {
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 2px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #64748b;
-    user-select: none;
-    min-width: 60px;
-    text-align: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #64748b;
+  user-select: none;
+  min-width: 55px;
+  text-align: center;
+  line-height: 1.15;
 }
+.date-item.selected { background: var(--surface); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.date-item.weekend { color: #dc2626; }
+.date-item:hover:not(.selected) { background: rgba(255,255,255,.55); }
 
-.date-item.selected {
-    background-color: #fff;
-    color: var(--text-primary);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+.timeline-header {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
 }
+.timeline-info-title { width: 220px; flex-shrink: 0; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.timeline-legend { display: flex; align-items: center; gap: 14px; }
+.timeline-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend-swatch { width: 11px; height: 11px; border-radius: 3px; border: 1px solid var(--border-color); display: inline-block; }
+.legend-swatch.day { background: var(--day-color); }
+.legend-swatch.night { background: var(--night-color); border-color: var(--night-color); }
+.legend-hint { color: var(--muted); }
 
-.date-item.weekend {
-    color: #ef4444;
-    /* Red for weekends */
-}
-
-.date-item:hover:not(.selected) {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-/* Timeline Rows */
 .location-row {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--border-color);
-    position: relative;
-    height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 9px 20px;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  min-height: 82px;
 }
 
 .location-info {
-    width: 200px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-right: 20px;
-    z-index: 10;
-    pointer-events: none;
-    position: relative;
-    /* For delete button positioning context if needed, or simply inside flex */
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 22px;
+  padding-right: 12px;
+  z-index: 10;
+  position: relative;
 }
 
-/* Delete Button */
 .delete-btn {
-    position: absolute;
-    left: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #cbd5e1;
-    font-size: 1.2rem;
-    padding: 2px;
-    border-radius: 4px;
-    opacity: 0;
-    transition: all 0.2s;
-    pointer-events: auto;
-    /* Re-enable pointer events since parent has none */
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  line-height: 1;
+  border-radius: 5px;
+  opacity: 0;
+  transition: .15s ease;
 }
+.location-row:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { color: #dc2626; background: #fee2e2; }
 
-.location-row:hover .delete-btn {
-    opacity: 1;
-}
+.location-header-row { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; min-width: 0; }
+.home-icon { font-size: 0.95rem; color: var(--accent-color); }
+.offset-badge { font-size: 0.78rem; font-weight: 700; color: #d97706; }
+.location-name { font-size: 0.84rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.location-detail { font-size: 0.68rem; color: var(--text-secondary); }
+.location-time { font-size: 0.82rem; font-weight: 600; margin-top: 3px; }
+.location-time-date { color: var(--text-secondary); font-weight: 400; margin-left: 4px; }
 
-.delete-btn:hover {
-    color: #ef4444;
-    background-color: #fee2e2;
-}
-
-.location-header-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-
-.home-icon {
-    font-size: 1.2rem;
-    color: var(--text-primary);
-}
-
-.offset-badge {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #f59e0b;
-    /* Amber/Orange like WTB */
-}
-
-.location-detail {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.location-time {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 4px;
-}
-
-/* Time Grid */
 .time-grid {
-    flex-grow: 1;
-    display: flex;
-    height: 40px;
-    /* The bars height */
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    cursor: crosshair;
+  flex-grow: 1;
+  display: flex;
+  height: 50px;
+  min-width: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  cursor: crosshair;
+  border: 1px solid var(--border-color);
 }
 
 .hour-block {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.75rem;
-    /* 12px */
-    font-weight: 500;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
-    user-select: none;
-    transition: background-color 0.2s;
-    color: var(--text-secondary);
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.64rem;
+  font-weight: 500;
+  border-right: 1px solid rgba(0,0,0,.055);
+  user-select: none;
+  color: var(--text-secondary);
+  transition: filter .12s ease;
+}
+.hour-block:last-child { border-right: 0; }
+.hour-block.day { background: var(--day-color); color: var(--text-primary); }
+.hour-block.night { background: var(--night-color); color: var(--night-text); }
+.hour-block.weekend-day { background: var(--weekend-color); }
+
+.hour-label { margin-bottom: 2px; white-space: nowrap; }
+.day-label { font-size: 0.52rem; opacity: .7; font-weight: 400; white-space: nowrap; }
+
+
+.empty-state strong { color: var(--text-primary); font-size: .9rem; }
+.empty-state span { font-size: .75rem; }
+.empty-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent-color);
+  font-size: 1.4rem; margin-bottom: 3px;
+}
+.empty-state button {
+  margin-top: 6px; border: 0; background: var(--accent-color); color: white;
+  padding: 7px 12px; border-radius: 6px; cursor: pointer; font-size: .75rem;
 }
 
-.hour-block:last-child {
-    border-right: none;
+.selection-overlay {
+  position: absolute;
+  top: 112px;
+  bottom: 0;
+  width: 0;
+  background: var(--highlight-bg);
+  border-left: 2px solid var(--highlight-border);
+  border-right: 2px solid var(--highlight-border);
+  border-radius: 4px;
+  pointer-events: none;
+  display: none;
+  z-index: 30;
 }
 
-/* Day/Night Styling */
-.hour-block.day {
-    background-color: var(--day-color);
-    color: var(--day-text);
+.selection-tooltip {
+  position: fixed;
+  display: none;
+  z-index: 200;
+  pointer-events: none;
+  background: #0f172a;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 5px;
+  font-size: .68rem;
+  white-space: nowrap;
+  box-shadow: 0 5px 15px rgba(15,23,42,.2);
 }
 
-.hour-block.night {
-    background-color: var(--night-color);
-    color: var(--night-text);
+@media (max-width: 800px) {
+  body { padding: 10px; }
+  .app-container { border-radius: 9px; }
+  .control-bar { align-items: stretch; flex-direction: column; }
+  .search-container { width: 100%; }
+  .date-controls { overflow-x: auto; }
+  .timeline-header { display: none; }
+  .location-row { padding: 9px 12px; }
+  .location-info { width: 155px; padding-left: 18px; }
+  .hour-block { font-size: .56rem; }
+  .location-time-date { display: none; }
 }
 
-.hour-block.weekend-day {
-    background-color: #fff7ed;
-    /* slight orange tint */
-}
-
-/* Home location styling differentiation (optional, making it look 'active') */
-.location-row.home-row .location-name {
-    color: #000;
-}
-
-/* Hover Highlight - The vertical bar */
-/* We will actually use a separate overlay or just utilize :hover on a shared parent via JS 
-   or simpler CSS trickery if possible, but for a true "column" highlight across rows, JS tracking is easiest 
-   or a massive grid. Let's try a simple approach first: 
-   Since interacting with one hour block should highlight that vertical slice.
-*/
-
-.hour-label {
-    margin-bottom: 2px;
-}
-
-.day-label {
-    font-size: 0.6rem;
-    opacity: 0.7;
-    font-weight: 300;
-}
-
-/* Selected Column Highlighter (Absolute overlay approach) */
-#selection-overlay {
-    position: absolute;
-    top: 76px;
-    /* Header height offset approx */
-    bottom: 0;
-    width: 0;
-    /* Dynamic */
-    background-color: rgba(255, 200, 0, 0.15);
-    border: 2px solid #fbbf24;
-    border-radius: 4px;
-    pointer-events: none;
-    display: none;
-    z-index: 5;
-}
-
-/* Current time marker */
-.current-time-marker {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background-color: red;
-    z-index: 20;
-    pointer-events: none;
+@media (max-width: 560px) {
+  body { padding: 0; }
+  .app-container { border: 0; border-radius: 0; }
+  .app-header { padding: 15px; }
+  .location-row { padding: 8px 10px; min-height: 74px; }
+  .location-info { width: 132px; }
+  .location-name { font-size: .75rem; }
+  .location-detail { font-size: .62rem; }
+  .location-time { font-size: .7rem; }
+  .time-grid { height: 46px; }
+  .hour-block { font-size: .5rem; }
+  .date-item { min-width: 48px; padding-left: 7px; padding-right: 7px; }
 }
